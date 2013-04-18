@@ -1,0 +1,69 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=4529
+
+
+Please goto homepage for a better view of the introduction.
+
+Homepage: http://zhaocai.github.io/GoldenView.Vim/ 
+Screencast:  http://dl.dropboxusercontent.com/u/1897501/Screencasts/GoldenView.gif 
+
+
+If you like it, please star or fork in https://github.com/zhaocai/GoldenView.Vim so that more people may find it.
+
+
+
+
+
+
+>>> Introduction: 
+
+The initial motive for GoldenView comes from the frustration of using other vim plugins to autoresize split windows. The idea is deadly simple and very useful: resize the focused window to a proper size. However, in practice, many hiccups makes autoresizing not a smooth experience. Below are a list of issues I am trying to solve: 
+
+First and the most important one, autoresizing should play nicely with existing plugins like tagbar, vimfiler, unite, VOoM, quickfix, undotree, gundo, etc. These windows should manage there own window size. 
+
+Second, autoresizing should take care of the other windows too. Resizing the focused window may cause the other windows become too small. When you have 4+ split windows, autoresizing may just make a mess out of it. 
+
+
+
+
+>>> Features:
+
+GoldenView has preliminarily solved the issues described above. It also provides other features. Bascally, it does two things:
+
+1. Autoresizing
+
+First of all, it automatically resize the focused split window to a "golden" view based on golden ratio and textwidth.
+
+2. Tiled Windows Management
+
+Second, it maps a single key (<C-L> by default) to nicely split windows to tiled windows.
+
+      |---|--------------|------------|---|
+      |-F-|--------------|----S1------|-T-|
+      |-I-|--------------+------------|-A-|
+      |-L-|--MAIN-PANE---|----S2------|-G-|
+      |-E-|--------------+------------+-B-|
+      |-R-|--------------|----S3------|-A-|
+      |---|--------------|------------|---|
+
+To get this view, just hit <C-L> 4 times. or, if you have a large monitor, you may get tiled windows below.
+
+      +===+==============+==============+============+===+
+      |   |              |              |            |   |
+      | F |              |              |    S1      | T |
+      | I |              |              +------------| A |
+      | L |  MAIN PANE   |      M2      |    S2      | G |
+      | E |              |              +------------+ B |
+      | R |              |              |    S3      | A |
+      |   |              |              |            |   |
+      +===+==============+==============+============+===+
+
+
+To quickly switch between those windows, a few keys are mapped to
+
+- Focuse to the main window
+- Switch with the largest, smallest, etc.
+- Jump to next and previous window
+
+Requirements:
+- Vim 7.3 or later
+
