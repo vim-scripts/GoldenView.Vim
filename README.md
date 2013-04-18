@@ -1,17 +1,18 @@
 # Always have a nice view for vim split windows
 
-    ------------- - ----------------------------------------------------------
+    ------------- - -----------------------------------------------
     Plugin        : GoldenView.vim
     Author        : Zhao Cai
     EMail         : caizhaoff@gmail.com
-    URL           : https://github.com/zhaocai/GoldenView.vim
+    URL           : http://zhaocai.github.io/GoldenView.Vim/
+    Version       : 1.1.1
     Date Created  : Tue 18 Sep 2012 05:23:13 PM EDT
     Last Modified : Wed 17 Apr 2013 09:52:45 PM EDT
-    ------------- - ----------------------------------------------------------
+    ------------- - -----------------------------------------------
 
 
 
-The initial motive for [GoldenView][GoldenView] comes from the frustration of using other vim plugins to autoresize split windows. The idea is deadly simple and very useful: **resize the focused window to a proper size.** However, in practice, many hiccups makes **autoresizing** not a smooth experience.  Below are a list of issues I am trying to solve:
+The initial motive for [GoldenView][GoldenView] comes from the frustration of using other vim plugins to autoresize split windows. The idea is deadly simple and very useful: **resize the focused window to a proper size.** However, in practice, many hiccups makes **autoresizing** not a smooth experience.  Below are a list of issues [GoldenView][GoldenView] attempts to solve:
 
 First and the most important one, autoresizing should play nicely with existing plugins like `tagbar`, `vimfiler`, `unite`, `VOoM`, `quickfix`, `undotree`, `gundo`, etc. These windows should manage there own window size.
 
@@ -32,30 +33,34 @@ First of all, it automatically resize the focused split window to a "golden" vie
 ### 2. Tiled Windows Management
 Second, it maps a single key (`<C-L>` by default) to nicely split windows to tiled windows. 
 ```
------------------------------------
-|              |        S1        |
-|              |===================
-|      V       |        S2        |
-|              |===================
-|              |        S3        |
------------------------------------
+----+--------------+------------+---+
+|   |              |            |   |
+| F |              |    S1      | T |
+| I |              +------------| A |
+| L |  MAIN PANE   |    S2      | G |
+| E |              +------------+ B |
+| R |              |    S3      | A |
+|   |              |            |   |
++---+--------------+------------+---+
 ```
-To get this view, just hit `<C-L>` 4 times. or, if you have a large monitor, 
+To get this view, just hit `<C-L>` 4 times. or, if you have a large monitor, you may get tiled windows below.
 
 ```
---------------------------------------------------
-|              |              |        S1        |
-|              |              |===================
-|      V1      |      V2      |        S2        |
-|              |              |===================
-|              |              |        S3        |
---------------------------------------------------
+----+--------------+--------------+------------+---+
+|   |              |              |            |   |
+| F |              |              |    S1      | T |
+| I |              |              +------------| A |
+| L |  MAIN PANE   |      M2      |    S2      | G |
+| E |              |              +------------+ B |
+| R |              |              |    S3      | A |
+|   |              |              |            |   |
++---+--------------+--------------+------------+---+
 ```
 
 
 To quickly switch between those windows, a few keys are mapped to 
 
-- Focuse to the main window (- the **V** pane above),
+- Focuse to the main window
 - Switch with the largest, smallest, etc. 
 - Jump to next and previous window
 
@@ -101,18 +106,18 @@ Unarchive the zip file into a directory that is under `runtimepath` of your vim,
 ## Quick Start
 [GoldenView][GoldenView] should work out of the box without configuration. It should automatically start to resize focused window to [golden ratio][golden-ratio-wikipedia] based on `textwidth` and vim available size. You may start to play with it now.
 
-To get you started, a few default keymappings are list as below:
+To get you started, a few default keys are mapped as below:
 
 ```vim 
-" split to tiled windows
+" 1. split to tiled windows
 nmap <silent> <C-L>  <Plug>GoldenViewSplit
 
-" quickly switch current window with the main pane
+" 2. quickly switch current window with the main pane
 " and toggle back
 nmap <silent> <F8>   <Plug>GoldenViewSwitchMain
 nmap <silent> <S-F8> <Plug>GoldenViewSwitchToggle
 
-" jump to next and previous window
+" 3. jump to next and previous window
 nmap <silent> <C-N>  <Plug>GoldenViewNext
 nmap <silent> <C-P>  <Plug>GoldenViewPrevious
 
@@ -121,22 +126,23 @@ nmap <silent> <C-P>  <Plug>GoldenViewPrevious
 The meaning of those keys are self-explaining. A general workflow would be `<Plug>GoldenViewSplit` key to quickly and nicely split windows to the layout as below. Then you may open your files.
 
 ```
------------------------------------
-|              |        S1        |
-|              |===================
-|      V       |        S2        |
-|              |===================
-|              |        S3        |
------------------------------------
+----+--------------+------------+---+
+|   |              |            |   |
+| F |              |    S1      | T |
+| I |              +------------| A |
+| L |  MAIN PANE   |    S2      | G |
+| E |              +------------+ B |
+| R |              |    S3      | A |
+|   |              |            |   |
++---+--------------+------------+---+
+
 ```
 
-To switch `S1` with `V`, in `S1` and hit `<Plug>GoldenViewSwitchMain`. To switch back, hit `<Plug>GoldenViewSwitchToggle` in either `V` or `S1`
+To switch `S1` with `MAIN PANE`, in `S1` and hit `<Plug>GoldenViewSwitchMain`. To switch back, hit `<Plug>GoldenViewSwitchToggle` in either `MAIN PAIN` or `S1`
 
 #### g:goldenview__enable_default_mapping
 
-And, I konw every vimer has a different set of key mappings. 
-
-If you you are (most likely) unhappy about some of the mappings, map you own keys as below: 
+Every experienced vim user has a different set of key mappings. If you you are (most likely) unhappy about some of the mappings, map you own keys as below: 
 
 ```vim
 let g:goldenview__enable_default_mapping = 0
@@ -151,7 +157,6 @@ if you do not want to start autoresizing automatically, you can put `let g:golde
 
 
 ## More Usage - Commands and Mappings
-
 
 1. `ToggleGoldenViewAutoResize`, `DisableGoldenViewAutoResize`, `EnableGoldenViewAutoResize`: These commands toggle, enable, and disable GoldenView autoresizing.
 
