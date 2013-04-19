@@ -13,7 +13,7 @@
 " ============================================================================
 " Load Guard:                                                             [[[1
 " ============================================================================
-if !GoldenView#zl#rc#load_guard(expand('<sfile>:t:r'), 700, 100, ['!&cp'])
+if !GoldenView#zl#rc#load_guard(expand('<sfile>:t:r'), 700, 130, ['!&cp'])
     finish
 endif
 
@@ -45,6 +45,15 @@ call GoldenView#zl#rc#set_default({
     \     '__Gundo_Preview__'         , '__Gundo__'           , 
     \     '\[LustyExplorer-Buffers\]' , '\-MiniBufExplorer\-' , 
     \     '_VOOM\d\+$'                , '__Urannotate_\d\+__' , 
+    \     '__MRU_Files__' , 
+    \   ],
+    \ },
+    \ 'g:goldenview__restore_urule'           : {
+    \   'filetype' : [
+    \     'nerdtree', 'vimfiler',
+    \   ],
+    \   'bufname' : [
+    \     '__MRU_Files__' , 
     \   ],
     \ },
     \
@@ -88,7 +97,7 @@ nnoremap <Plug>GoldenViewResize
 " Layout Split:
 " -------------
 nnoremap <Plug>GoldenViewSplit
-\ :<C-u>call GoldenView#zl#window#split_nicely()<CR>
+\ :<C-u>call GoldenView#Split()<CR>
 " [TODO]( define comfortable width &tw * 4/3) @zhaocai @start(2012-09-29 01:17)
 
 
