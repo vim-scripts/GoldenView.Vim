@@ -28,6 +28,9 @@ function! GoldenView#Init()
     let s:goldenview__golden_ratio = 1.618
     lockvar s:goldenview__golden_ratio
 
+    set equalalways
+    set eadirection=ver
+
 
     let s:goldenview__profile = {
     \ 'reset'   : {
@@ -114,6 +117,7 @@ function! GoldenView#WinLeave(...)
 "    exec GoldenView#zl#vim#context() | call GoldenView#Trace('WinLeave', a:000)
 
     " Do nothing if there is no split window
+    " --------------------------------------
     if winnr('$') < 2
         return
     endif
@@ -199,7 +203,7 @@ function! GoldenView#Resize(...)
         endfor
 
         if &cmdheight != t:goldenview['cmdheight']
-            silent exec 'set cmdheight=' . t:goldenview['cmdheight']
+            exec 'set cmdheight=' . t:goldenview['cmdheight']
         endif
 
         silent exec bufwinnr(current_bufnr) 'wincmd w'
@@ -429,10 +433,6 @@ endfunction
 " ============================================================================
 " Debug:                                                                  [[[1
 " ============================================================================
-finish " enable as demand
-
-
-
 
 function! GoldenView#Info()
     return {
@@ -443,7 +443,7 @@ function! GoldenView#Info()
     \   'winwidth'  : winwidth(0)  ,
     \   'winheight' : winheight(0) ,
     \ },
-    \ 'goldenview'  : t:goldenview,
+    \ 'goldenview'  : get(t:, 'goldenview', GoldenView#initialize_tab_variable()),
     \ 'setting' : {
     \   'win_count'    : winnr('$')    ,
     \   'lazyredraw'   : &lazyredraw   ,
@@ -458,43 +458,18 @@ function! GoldenView#Info()
     \}
 endfunction
 
-ruby << __RUBY__
-require "logger"
-require "fileutils"
-require "awesome_print"
-def is_linux?
-RUBY_PLATFORM.downcase.include?("linux")
-  end
 
-def is_windows?
-  RUBY_PLATFORM.downcase.include?("mswin")
-end
-
-def is_mac?
-  RUBY_PLATFORM.downcase.include?("darwin")
-end
-
-if is_mac?
-  logfile = File.expand_path('~/Library/Logs/vim/goldenview.log')
-else
-  logfile = File.expand_path('/var/log/vim/goldenview.log')
-end
-
-FileUtils.mkdir_p File.dirname(logfile)
-
-log = File.open(logfile, File::WRONLY | File::APPEND | File::CREAT)
-$logger = Logger.new(log, 'weekly')
-__RUBY__
-
-
-"function! GoldenView#Trace(...)
+function! GoldenView#Trace(...)
+    " -------- - -----------------------------------------------
+    "  Example : >
+    "    exec GoldenView#zl#vim#context() | call GoldenView#Trace(a:000)
+    " -------- - -----------------------------------------------
+    
     call GoldenView#initialize_tab_variable()
     let info            = GoldenView#Info()
-    let info['context'] = g:GoldenView_zl_context
+    let info['context'] = get(g:,'GoldenView_zl_context','')
     let info['args']    = a:000
-ruby << __RUBY__
-    $logger.ap VIM::evaluate('info'), :info
-__RUBY__
+    call GoldenView#zl#print#log(info)
 endfunction
 
 
