@@ -4,10 +4,11 @@
     Plugin        : GoldenView.vim
     Author        : Zhao Cai
     EMail         : caizhaoff@gmail.com
-    URL           : http://zhaocai.github.io/GoldenView.Vim/
-    Version       : 1.3.0
+    Homepage      : http://zhaocai.github.io/GoldenView.Vim/
+    Vim.org       : http://www.vim.org/scripts/script.php?script_id=4529
+    Version       : 1.3.5
     Date Created  : Tue 18 Sep 2012 05:23:13 PM EDT
-    Last Modified : Wed 17 Apr 2013 09:52:45 PM EDT
+    Last Modified : Mon 22 Apr 2013 05:55:22 PM EDT
     ------------- - -----------------------------------------------
 
 
@@ -160,15 +161,21 @@ nmap <silent> <MY_KEY> <Plug>GoldenViewSplit
 ```
 
 #### g:goldenview__enable_at_startup
-if you do not want to start auto-resizing automatically, you can put `let g:goldenview__enable_at_startup = 0` in your vimrc.
 
+if you do not want to start auto-resizing automatically, you can put the following script in your vimrc.
+
+```vim  
+et g:goldenview__enable_at_startup = 0
+```
 
 ## More Commands and Mappings
 
 ### `:ToggleGoldenViewAutoResize`
 ### `:DisableGoldenViewAutoResize`
 ### `:EnableGoldenViewAutoResize`
+
 These commands toggle, enable, and disable GoldenView auto-resizing.
+
 
 ### `:GoldenViewResize`
 this command do manual resizing of focused window. 
@@ -180,6 +187,7 @@ nmap <silent> <YOUR_KEY> <Plug>GoldenViewResize
 
 ```
 
+### `:SwitchGoldenViewMain`
 ### `:SwitchGoldenViewLargest`
 ### `:SwitchGoldenViewSmallest` 
 
@@ -259,7 +267,28 @@ For more details, please read the source code! :)
 Check my fork [minibufexpl.vim][] to see if it is working for you. I have send pull request to the origin repo. 
 
 
+### I cannot resize window height to < 7
 
+This is features. As mentioned in the [Introduction](#always-have-a-nice-view-for-vim-split-windows) section, there is no normal cases to have a normal window too small. For special cases like [minibufexpl.vim][], it can be handled case by case.
+
+
+However, if you really want to have small windows. It can be done by :
+
+```vim
+
+" Extend a new profile named 'small-height' from default profile.
+"
+" 1. Change "2" to your desire minimal height
+" 2. Change "small-height" to the profile name you like
+" ---------------------------------------------------------------
+call GoldenView#ExtendProfile('small-height', {
+\   'other_window_winheight'  : 2  ,
+\ })
+
+let g:goldenview__active_profile = 'small-height'
+```
+
+(refer to issue #5)
 
 ### I still have Issues:
 

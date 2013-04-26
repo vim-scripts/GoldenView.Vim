@@ -37,13 +37,15 @@ First of all, it automatically resize the focused split window to a "golden" vie
 
 Second, it maps a single key (<C-L> by default) to nicely split windows to tiled windows.
 
-      |---|--------------|------------|---|
-      |-F-|--------------|----S1------|-T-|
-      |-I-|--------------+------------|-A-|
-      |-L-|--MAIN-PANE---|----S2------|-G-|
-      |-E-|--------------+------------+-B-|
-      |-R-|--------------|----S3------|-A-|
-      |---|--------------|------------|---|
+      ====+==============+============+===+
+      |   |              |            |   |
+      | F |              |    S1      | T |
+      | I |              +------------| A |
+      | L |  MAIN PANE   |    S2      | G |
+      | E |              +------------+ B |
+      | R |              |    S3      | A |
+      |   |              |            |   |
+      +===+==============+============+===+
 
 To get this view, just hit <C-L> 4 times. or, if you have a large monitor, you may get tiled windows below.
 
